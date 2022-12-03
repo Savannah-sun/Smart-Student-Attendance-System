@@ -4,17 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PatternMatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener{
     private TextView banner;
     private EditText name, school, email, password;
     private Button register;
+    private ProgressBar bar;
 
     private User user;
 
@@ -30,6 +32,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
         register = (Button) findViewById(R.id.Register);
         banner = (TextView) findViewById(R.id.banner);
+        bar = (ProgressBar) findViewById(R.id.progressBar2);
 
         banner.setOnClickListener(this);
         register.setOnClickListener(this);
@@ -43,7 +46,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.banner:
                 startActivity(new Intent(this, MainActivity.class));
-
+                break;
         }
     }
 
@@ -74,5 +77,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         }
 
         user = new User(aemail, apassword);
+        Toast.makeText(RegisterUser.this,"User has been registered successfully!",Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
