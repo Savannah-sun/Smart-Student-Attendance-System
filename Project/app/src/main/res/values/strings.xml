@@ -13,7 +13,11 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_db_testing">Database Testing</string>
+    <string name="hint_word">Word...</string>
+    <string name="add_word">Add Word</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <string name="title_db_testing"> Testing_DB </string>
+
 
 </resources>
