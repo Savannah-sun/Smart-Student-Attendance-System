@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         testButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Do something in response to button click
-                navController.navigate(R.id.blankFragment);
+//                navController.navigate(R.id.blankFragment);
 
                 testText.setText("hi");
             }
