@@ -26,6 +26,19 @@ public class Class_Home extends Fragment {
 
         binding = FragmentClassHomeBinding.inflate(inflater, container, false);
 
-        return inflater.inflate(R.layout.fragment_class__home, container, false);
+
+        binding.addClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Add_Class add_class = new Add_Class();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.replaceContainer, add_class);
+                transaction.commit();
+            }
+        });
+
+
+
+        return binding.getRoot();
     }
 }
