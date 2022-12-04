@@ -22,4 +22,14 @@
         android:name="com.example.ee193take2.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/class_Home"
+        android:name="com.example.ee193take2.Class_Home"
+        android:label="fragment_class__home"
+        tools:layout="@layout/fragment_class__home" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.ee193take2.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>
