@@ -27,10 +27,23 @@ public class Class_Home extends Fragment {
         binding = FragmentClassHomeBinding.inflate(inflater, container, false);
 
 
+        /* Add Class */
         binding.addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Add_Class add_class = new Add_Class();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.replaceContainer, add_class);
+                transaction.commit();
+            }
+        });
+
+
+        /* See Class */
+        binding.buttonPretendClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Class_Info add_class = new Class_Info();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.replaceContainer, add_class);
                 transaction.commit();

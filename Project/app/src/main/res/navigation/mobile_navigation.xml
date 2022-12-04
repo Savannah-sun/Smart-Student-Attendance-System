@@ -37,4 +37,24 @@
         android:name="com.example.ee193take2.Add_Class"
         android:label="fragment_add__class"
         tools:layout="@layout/fragment_add__class" />
+    <fragment
+        android:id="@+id/class_Info"
+        android:name="com.example.ee193take2.Class_Info"
+        android:label="fragment_class__info"
+        tools:layout="@layout/fragment_class__info" />
+    <fragment
+        android:id="@+id/class_Offerings"
+        android:name="com.example.ee193take2.Class_Offerings"
+        android:label="fragment_class__offerings"
+        tools:layout="@layout/fragment_class__offerings" />
+    <fragment
+        android:id="@+id/class_Statistics"
+        android:name="com.example.ee193take2.class_Statistics"
+        android:label="fragment_class__statistics"
+        tools:layout="@layout/fragment_class__statistics" />
+    <fragment
+        android:id="@+id/class_Students"
+        android:name="com.example.ee193take2.Class_Students"
+        android:label="fragment_class__students"
+        tools:layout="@layout/fragment_class__students" />
 </navigation>

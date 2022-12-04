@@ -60,6 +60,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.buttonHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ConstraintLayout) findViewById(R.id.replaceContainer)).removeAllViews();
+                Class_Home class_info = new Class_Home();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.replaceContainer, class_info);
+                transaction.commit();
+            }
+        });
+
 
     }
 
