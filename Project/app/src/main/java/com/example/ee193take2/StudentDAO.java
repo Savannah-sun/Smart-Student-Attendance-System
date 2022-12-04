@@ -20,4 +20,7 @@ public interface StudentDAO {
 
     @Query("SELECT * FROM student_table ORDER BY last_name ASC")
     LiveData<List<Student>> getAlphabetizedStudents();
+
+    @Query("SELECT * FROM student_table where last_name = :last_name")
+    LiveData<List<Student>> getByLastName(String last_name);
 }

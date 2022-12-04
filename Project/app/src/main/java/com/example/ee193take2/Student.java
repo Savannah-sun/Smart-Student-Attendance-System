@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.ColumnInfo;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -46,6 +47,8 @@ public class Student {
     public Student (){
         firstName ="";
         lastName = "";
+        classes = Collections.emptyList();
+        attendance = Collections.emptyList();
     }
 }
 
