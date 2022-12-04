@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
             adapter.submitList(students);
         });
 
+        mStudentViewModel.deleteAll();
+
         /* -- Bottom nav bar -- */
 //        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
 //                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
@@ -107,6 +109,16 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener( view -> {
             Intent intent =new Intent(MainActivity.this, NewStudentActivity.class);
             NewStudentActivityResultLauncher.launch(intent);
+        });
+
+        FloatingActionButton hide = findViewById(R.id.hide);
+        hide.setOnClickListener( view -> {
+            if(recyclerView.getVisibility() == View.VISIBLE){
+                recyclerView.setVisibility(View.INVISIBLE);
+            }
+            else{
+                recyclerView.setVisibility(View.VISIBLE);
+            }
         });
 
     }

@@ -35,5 +35,11 @@ public class StudentRepository {
             mStudentDao.insert(student);
         });
     }
+
+    public void deleteAll(){
+        StudentRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mStudentDao.deleteAll();
+        });
+    }
 }
 
