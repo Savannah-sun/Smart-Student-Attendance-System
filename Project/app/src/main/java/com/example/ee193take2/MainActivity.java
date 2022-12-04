@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onActivityResult(ActivityResult results) {
                     if (results.getResultCode() == Activity.RESULT_OK) {
                         Intent data = results.getData();
-                        Student student = new Student(data.getStringExtra(NewStudentActivity.EXTRA_REPLY), "TEST");
+                        Student student = new Student(data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[1], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[0]);
                         mStudentViewModel.insert(student);
                     } else {
                         Toast.makeText(

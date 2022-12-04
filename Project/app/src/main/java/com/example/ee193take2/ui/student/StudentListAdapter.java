@@ -22,7 +22,7 @@ public class StudentListAdapter extends ListAdapter<Student, StudentViewHolder> 
     @Override
     public void onBindViewHolder(StudentViewHolder holder, int position){
         Student current = getItem(position);
-        holder.bind(current.getLastName());
+        holder.bind(current.getLastName() + ", " + current.getFirstName());
     }
 
     public static class StudentDiff extends DiffUtil.ItemCallback<Student>{
