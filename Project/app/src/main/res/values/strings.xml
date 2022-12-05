@@ -18,4 +18,11 @@
     <string name="Fullname">Full Name</string>
     <string name="school">School</string>
     <string name="Register">Register</string>
+    <string name="hint_word">FirstName</string>
+    <string name="add_word">Add Word</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <string name="title_db_testing"> Testing_DB </string>
+
+
 </resources>

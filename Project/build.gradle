@@ -1,5 +1,27 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+// Project build.gradle file.
+buildscript {
+        ext.ksp_version = "1.5.31-1.0.0"
+        ext.kotlin_version = "1.7.10"
+        repositories {
+            maven{ url 'https://dl.bintray.com/kotlin/kotlin-eap'}
+            maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+            mavenCentral()
+            jcenter() // Warning: this repository is going to shut down soon
+            gradlePluginPortal()
+            google()
+
+        }
+        dependencies {
+            classpath "com.android.tools.build:gradle:7.0.2"
+            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+            //other dependencies here
+        }
+}
 plugins {
     id 'com.android.application' version '7.3.1' apply false
     id 'com.android.library' version '7.3.1' apply false
+
 }
+
