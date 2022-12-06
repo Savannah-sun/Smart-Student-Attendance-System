@@ -6,6 +6,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
+
 import java.util.List;
 
 import com.example.ee193take2.Student;
@@ -23,4 +25,11 @@ public interface StudentDAO {
 
     @Query("SELECT * FROM student_table where last_name = :last_name")
     LiveData<List<Student>> getByLastName(String last_name);
+
+    //Option to update students classes using a list of classes
+    @Query("UPDATE student_table SET classes = :classes where uid = :id")
+    void updateClasses(List<String> classes, int id);
+    //Retrieve classes given a students unique ID.
+    @Query("SELECT classes FROM student_table where uid =:id")
+    public List<String> getClasses(int id);
 }

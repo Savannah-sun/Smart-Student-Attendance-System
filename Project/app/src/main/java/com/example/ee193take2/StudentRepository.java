@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 public class StudentRepository {
 
@@ -41,5 +42,21 @@ public class StudentRepository {
             mStudentDao.deleteAll();
         });
     }
+    //Returns future which must be "GET"
+    public Future<List<String>> getClasses(int id){
+         return (Future<List<String>>) StudentRoomDatabase.databaseWriteExecutor.submit(() -> {
+             mStudentDao.getClasses(id);
+         });
+    }
+    //Sets classes.
+    public void updateClasses(List<String> classes, int id){
+        StudentRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mStudentDao.updateClasses(classes, id);
+        });
+    }
+
+
+
+
 }
 

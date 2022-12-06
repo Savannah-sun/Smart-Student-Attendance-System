@@ -39,6 +39,11 @@ public class Student {
 
     public void setClasses(List<String> classes) {this.classes = classes;}
 
+    //Helper function to add a class to a student.
+    public void addClass(String course){
+        this.classes.add(course);
+    }
+
     public Student(String last, String first){
         firstName = first;
         lastName = last;
