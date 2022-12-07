@@ -1,9 +1,11 @@
 package com.example.ee193take2;
 
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.ColumnInfo;
+import androidx.room.Relation;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,8 +25,6 @@ public class Student {
     @ColumnInfo(name = "attendance")
     private List<Boolean> attendance;
 
-    @ColumnInfo(name = "classes")
-    private List<String> classes;
 
 
     public String getLastName() {return this.lastName;}
@@ -35,14 +35,6 @@ public class Student {
 
     public void setAttendance(List<Boolean> attendance) {this.attendance = attendance;}
 
-    public List<String> getClasses() {return this.classes;}
-
-    public void setClasses(List<String> classes) {this.classes = classes;}
-
-    //Helper function to add a class to a student.
-    public void addClass(String course){
-        this.classes.add(course);
-    }
 
     public Student(String last, String first){
         firstName = first;
@@ -52,7 +44,6 @@ public class Student {
     public Student (){
         firstName ="";
         lastName = "";
-        classes = Collections.emptyList();
         attendance = Collections.emptyList();
     }
 }

@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        mStudentViewModel.deleteAll();
+        //mStudentViewModel.deleteAll();
 
         /* -- Bottom nav bar -- */
 //        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                     if (results.getResultCode() == Activity.RESULT_OK) {
                         Intent data = results.getData();
                         Student student = new Student(data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[1], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[0]);
-                        mStudentViewModel.insert(student);
+                        mStudentViewModel.insertStudent(student);
                     } else {
                         Toast.makeText(
                                 getApplicationContext(),

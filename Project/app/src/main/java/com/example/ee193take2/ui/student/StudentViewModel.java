@@ -28,8 +28,8 @@ public class StudentViewModel extends AndroidViewModel {
         return mAllStudents;
     }
 
-    public void insert(Student student) {
-        mRepository.insert(student);
+    public void insertStudent(Student student) {
+        mRepository.insertStudent(student);
     }
 
     public void deleteAll() {
@@ -37,16 +37,16 @@ public class StudentViewModel extends AndroidViewModel {
     }
 
 
-    public List<String> getClasses(int id) {
-        Future<List<String>> sFutures = mRepository.getClasses(id);
-        List<String> classes;
-        try {
-            classes = sFutures.get();
-        } catch (ExecutionException | InterruptedException ex) {
-            return Collections.emptyList();
-        }
-
-        return classes;
-    }
+//    public List<String> getClasses(int id) {
+//        Future<List<String>> sFutures = mRepository.getClasses(id);
+//        List<String> classes;
+//        try {
+//            classes = sFutures.get();
+//        } catch (ExecutionException | InterruptedException ex) {
+//            return Collections.emptyList();
+//        }
+//
+//        return classes;
+//    }
 
 }
