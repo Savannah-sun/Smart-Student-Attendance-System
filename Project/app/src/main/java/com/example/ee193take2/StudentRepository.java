@@ -48,6 +48,7 @@ public class StudentRepository {
              mStudentDao.getClasses(id);
          });
     }
+
     //Sets classes.
     public void updateClasses(List<String> classes, int id){
         StudentRoomDatabase.databaseWriteExecutor.execute(() -> {
