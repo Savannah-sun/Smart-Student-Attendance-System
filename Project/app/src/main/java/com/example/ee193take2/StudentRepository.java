@@ -5,10 +5,11 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 public class StudentRepository {
 
-    private StudentDAO mStudentDao;
+    private CourseWithStudentDAO mStudentDao;
     private LiveData<List<Student>> mAllStudents;
 
 
@@ -18,7 +19,7 @@ public class StudentRepository {
     // https://github.com/googlesamples
     public StudentRepository(Application application) {
         StudentRoomDatabase db = StudentRoomDatabase.getDatabase(application);
-        mStudentDao = db.studentDAO();
+        mStudentDao = db.CourseWithStudentDAO();
         mAllStudents = mStudentDao.getAlphabetizedStudents();
     }
 
@@ -30,9 +31,9 @@ public class StudentRepository {
 
     // You must call this on a non-UI thread or your app will throw an exception. Room ensures
     // that you're not doing any long running operations on the main thread, blocking the UI.
-    public void insert(Student student) {
+    public void insertStudent(Student student) {
         StudentRoomDatabase.databaseWriteExecutor.execute(() -> {
-            mStudentDao.insert(student);
+            mStudentDao.insertStudent(student);
         });
     }
 
@@ -41,5 +42,22 @@ public class StudentRepository {
             mStudentDao.deleteAll();
         });
     }
+//    //Returns future which must be "GET"
+//    public Future<List<String>> getClasses(int id){
+//         return (Future<List<String>>) StudentRoomDatabase.databaseWriteExecutor.submit(() -> {
+//             mStudentDao.getClasses(id);
+//         });
+//    }
+
+//    //Sets classes.
+//    public void updateClasses(List<String> classes, int id){
+//        StudentRoomDatabase.databaseWriteExecutor.execute(() -> {
+//            mStudentDao.updateClasses(classes, id);
+//        });
+//    }
+
+
+
+
 }
 

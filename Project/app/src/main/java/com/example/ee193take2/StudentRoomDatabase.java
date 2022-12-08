@@ -14,10 +14,10 @@ import com.example.ee193take2.Student;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Student.class},version = 1, exportSchema = false)
+@Database(entities = {Student.class, Course.class, CourseWithStudent.class},version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class StudentRoomDatabase extends RoomDatabase {
-    public abstract StudentDAO studentDAO();
+    public abstract CourseWithStudentDAO CourseWithStudentDAO();
 
     private static volatile StudentRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -29,7 +29,7 @@ public abstract class StudentRoomDatabase extends RoomDatabase {
             synchronized (StudentRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    StudentRoomDatabase.class, "word_database")
+                                    StudentRoomDatabase.class, "student_database")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
@@ -49,14 +49,14 @@ public abstract class StudentRoomDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 //Populate the database in the background
                 //Start with some starter items.
-                StudentDAO dao = INSTANCE.studentDAO();
+                CourseWithStudentDAO dao = INSTANCE.CourseWithStudentDAO();
                 dao.deleteAll();
 
                 Student student = new Student("Ever", "Greatest");
-                dao.insert(student);
+                dao.insertStudent(student);
 
                 student = new Student("123", "Testing");
-                dao.insert(student);
+                dao.insertStudent(student);
             });
         };
     };

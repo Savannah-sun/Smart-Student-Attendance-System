@@ -22,6 +22,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -33,6 +34,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ee193take2.databinding.ActivityMainBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -65,7 +68,8 @@ public class MainActivity extends AppCompatActivity{
             adapter.submitList(students);
         });
 
-        mStudentViewModel.deleteAll();
+
+        //mStudentViewModel.deleteAll();
 
 
         binding.startButton.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +141,7 @@ public class MainActivity extends AppCompatActivity{
                     if (results.getResultCode() == Activity.RESULT_OK) {
                         Intent data = results.getData();
                         Student student = new Student(data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[1], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[0]);
-                        mStudentViewModel.insert(student);
+                        mStudentViewModel.insertStudent(student);
                     } else {
                         Toast.makeText(
                                 getApplicationContext(),
