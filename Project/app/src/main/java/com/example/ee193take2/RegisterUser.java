@@ -17,8 +17,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private EditText name, school, email, password;
     private Button register;
     private ProgressBar bar;
-
-    private User user;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.Register:
-                registerUser();
                 break;
             case R.id.banner:
                 startActivity(new Intent(this, MainActivity.class));
@@ -50,34 +48,5 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void registerUser() {
-        String aemail = email.getText().toString().trim();
-        String aname = name.getText().toString().trim();
-        String apassword = password.getText().toString().trim();
-        String aschool = school.toString().toString().trim();
-        if(aname.isEmpty()){
-            name.setError("Name is required!");
-            name.requestFocus();
-            return;
-        }
-        if(aschool.isEmpty()){
-            school.setError("School is required!");
-            school.requestFocus();
-            return;
-        }
-        if(aemail.isEmpty()){
-            email.setError("Email is required!");
-            email.requestFocus();
-            return;
-        }
-        if(!Patterns.EMAIL_ADDRESS.matcher(aemail).matches()){
-            email.setError("Please provide a correct email address");
-            email.requestFocus();
-            return;
-        }
 
-        user = new User(aemail, apassword);
-        Toast.makeText(RegisterUser.this,"User has been registered successfully!",Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this, MainActivity.class));
-    }
 }

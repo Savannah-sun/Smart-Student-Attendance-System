@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import com.example.ee193take2.Student;
+import com.example.ee193take2.ui.database.Student;
 
 public class StudentListAdapter extends ListAdapter<Student, StudentViewHolder> {
 

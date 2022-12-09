@@ -1,15 +1,14 @@
-package com.example.ee193take2;
+package com.example.ee193take2.ui.database;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
 public class StudentRepository {
 
-    private CourseWithStudentDAO mStudentDao;
+    private DAO mStudentDao;
     private LiveData<List<Student>> mAllStudents;
 
 
@@ -20,7 +19,6 @@ public class StudentRepository {
     public StudentRepository(Application application) {
         StudentRoomDatabase db = StudentRoomDatabase.getDatabase(application);
         mStudentDao = db.CourseWithStudentDAO();
-        mAllStudents = mStudentDao.getAlphabetizedStudents();
     }
 
     // Room executes all queries on a separate thread.

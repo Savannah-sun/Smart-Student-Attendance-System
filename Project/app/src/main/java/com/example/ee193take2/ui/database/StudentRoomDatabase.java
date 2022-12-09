@@ -1,4 +1,4 @@
-package com.example.ee193take2;
+package com.example.ee193take2.ui.database;
 
 import android.content.Context;
 
@@ -6,18 +6,18 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.ee193take2.Student;
+import com.example.ee193take2.Converters;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Student.class, Course.class, CourseWithStudent.class},version = 1, exportSchema = false)
+@Database(entities = {Student.class, Course.class,CourseOffering.class,StudentClassOffering.class},version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class StudentRoomDatabase extends RoomDatabase {
-    public abstract CourseWithStudentDAO CourseWithStudentDAO();
+    public abstract DAO CourseWithStudentDAO();
 
     private static volatile StudentRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -49,14 +49,14 @@ public abstract class StudentRoomDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 //Populate the database in the background
                 //Start with some starter items.
-                CourseWithStudentDAO dao = INSTANCE.CourseWithStudentDAO();
+                DAO dao = INSTANCE.CourseWithStudentDAO();
                 dao.deleteAll();
-
-                Student student = new Student("Ever", "Greatest");
-                dao.insertStudent(student);
-
-                student = new Student("123", "Testing");
-                dao.insertStudent(student);
+//
+//                Student student = new Student("Ever", "Greatest");
+//                dao.insertStudent(student);
+//
+//                student = new Student("123", "Testing");
+//                dao.insertStudent(student);
             });
         };
     };

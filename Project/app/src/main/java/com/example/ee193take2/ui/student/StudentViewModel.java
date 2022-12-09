@@ -5,13 +5,10 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.ee193take2.Student;
-import com.example.ee193take2.StudentRepository;
+import com.example.ee193take2.ui.database.Student;
+import com.example.ee193take2.ui.database.StudentRepository;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 public class StudentViewModel extends AndroidViewModel {
     private StudentRepository mRepository;
