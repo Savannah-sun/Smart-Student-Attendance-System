@@ -2,18 +2,14 @@ package com.example.ee193take2;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.ee193take2.ui.database.DAO;
-import com.example.ee193take2.ui.database.DAOdatabase;
 import com.example.ee193take2.ui.database.Student;
-import com.example.ee193take2.ui.database.StudentRoomDatabase;
+import com.example.ee193take2.ui.database.DBViewModel;
 import com.example.ee193take2.ui.student.StudentListAdapter;
-import com.example.ee193take2.ui.student.StudentViewModel;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -22,30 +18,22 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Database;
-import androidx.room.Room;
 
 import com.example.ee193take2.databinding.ActivityMainBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.List;
+import java.util.Random;
 
 import pl.com.salsoft.sqlitestudioremote.SQLiteStudioService;
-import pl.com.salsoft.sqlitestudioremote.internal.SQLiteStudioDbOpenHelper;
 
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
-    private StudentViewModel mStudentViewModel;
-    //private DAO dao;
-    //private DAOdatabase db;
-
-
-    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    private DBViewModel dbViewModel;public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,23 +43,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         SQLiteStudioService.instance().start(this);
 
-//        Context context = getApplicationContext();
-//        db = DAOdatabase.getInstance(context);
-//        dao = db.allDao();
-
         RecyclerView recyclerView = findViewById((R.id.recyclerview));
         final StudentListAdapter adapter = new StudentListAdapter(new StudentListAdapter.StudentDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mStudentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
+        dbViewModel = new ViewModelProvider(this).get(DBViewModel.class);
 
-        mStudentViewModel.getAllStudents().observe(this, students -> {
+        dbViewModel.getAllStudents().observe(this, students -> {
             adapter.submitList(students);
         });
 
-
-        //mStudentViewModel.deleteAll();
+        dbViewModel.deleteAllStudents();
 
 
         binding.startButton.setOnClickListener(new View.OnClickListener() {
@@ -121,8 +104,9 @@ public class MainActivity extends AppCompatActivity {
                 public void onActivityResult(ActivityResult results) {
                     if (results.getResultCode() == Activity.RESULT_OK) {
                         Intent data = results.getData();
-                        Student student = new Student(data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[1], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[0]);
-                        mStudentViewModel.insertStudent(student);
+                        Student student = new Student(random.nextInt(1000),data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[1], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[0],
+                                data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[2], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[3], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[4]);
+                        dbViewModel.insertStudent(student);
                     } else {
                         Toast.makeText(
                                 getApplicationContext(),
@@ -131,6 +115,4 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-
-    }
 }

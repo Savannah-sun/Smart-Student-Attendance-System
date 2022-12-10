@@ -3,6 +3,7 @@ package com.example.ee193take2.ui.database;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.ColumnInfo;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Entity(tableName = "student_table",indices={@Index({"first_name","last_name"})})
 public class Student {
+
     @PrimaryKey
     @NotNull
     @ColumnInfo(name = "student_id")
@@ -27,20 +29,17 @@ public class Student {
     @ColumnInfo(name = "last_name")
     private String lastName;
 
-//    @ColumnInfo(name = "attendance")
-//    private List<Boolean> attendance;
-
     @ColumnInfo(name = "email")
     private String email;
 
     @ColumnInfo(name = "status")
     private String status;
 
-    public int getUid() {
+    public int getStudent_id() {
         return student_id;
     }
 
-    public void setUid(int uid) {
+    public void setStudent_id(int uid) {
         this.student_id = uid;
     }
 
@@ -70,6 +69,11 @@ public class Student {
         this.email = email;
         this.status = status;
         this.payment = payment;
+    }
+    @Ignore
+    public Student(String firstName, String lastName){
+        this.firstName =firstName;
+        this.lastName = lastName;
     }
 
     public String getEmail() {
