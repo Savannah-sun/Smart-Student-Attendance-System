@@ -9,12 +9,10 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.ee193take2.Converters;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Student.class, Course.class,CourseOffering.class,StudentClassOffering.class},version = 1, exportSchema = false)
+@Database(entities = {Student.class, Course.class, CourseOffering.class, StudentClassOffering.class, CalendarCourseOffering.class, Attendance.class},version = 1)
 @TypeConverters({Converters.class})
 public abstract class StudentRoomDatabase extends RoomDatabase {
     public abstract DAO CourseWithStudentDAO();
@@ -24,7 +22,7 @@ public abstract class StudentRoomDatabase extends RoomDatabase {
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static StudentRoomDatabase getDatabase(final Context context) {
+    public static StudentRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (StudentRoomDatabase.class) {
                 if (INSTANCE == null) {

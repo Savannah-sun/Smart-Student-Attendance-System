@@ -17,7 +17,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private EditText name, school, email, password;
     private Button register;
     private ProgressBar bar;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

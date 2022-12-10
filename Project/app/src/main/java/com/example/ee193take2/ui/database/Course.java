@@ -15,16 +15,6 @@ public class Course {
     @ColumnInfo(name = "course_id")
     private int course_id;
 
-    @Override
-    public String toString() {
-        return "Course{" +
-                "course_id=" + course_id +
-                ", class_name='" + class_name + '\'' +
-                ", status=" + status +
-                ", number_offerings=" + number_offerings +
-                '}';
-    }
-
     @ColumnInfo
     private String class_name;
 
@@ -71,5 +61,15 @@ public class Course {
 
     public void setNumber_offerings(int number_offerings) {
         this.number_offerings = number_offerings;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "course_id=" + course_id +
+                ", class_name='" + class_name + '\'' +
+                ", status=" + status +
+                ", number_offerings=" + number_offerings +
+                '}';
     }
 }

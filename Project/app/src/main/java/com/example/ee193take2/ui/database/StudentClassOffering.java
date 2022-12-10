@@ -2,6 +2,7 @@ package com.example.ee193take2.ui.database;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 
 @Entity(tableName = "studentclassoffering_table",
         primaryKeys = {"courseOffering_id","student_id"},
@@ -30,5 +31,18 @@ public class StudentClassOffering {
 
     public void setCourseOffering_id(int courseOffering_id) {
         this.courseOffering_id = courseOffering_id;
+    }
+
+    public StudentClassOffering(int student_id, int courseOffering_id) {
+        this.student_id = student_id;
+        this.courseOffering_id = courseOffering_id;
+    }
+
+    @Override
+    public String toString() {
+        return "StudentClassOffering{" +
+                "student_id=" + student_id +
+                ", courseOffering_id=" + courseOffering_id +
+                '}';
     }
 }

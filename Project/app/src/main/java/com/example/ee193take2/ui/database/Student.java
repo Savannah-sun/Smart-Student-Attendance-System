@@ -3,6 +3,7 @@ package com.example.ee193take2.ui.database;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.ColumnInfo;
 import androidx.room.Relation;
@@ -13,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-@Entity(tableName = "student_table")
+@Entity(tableName = "student_table",indices={@Index({"first_name","last_name"})})
 public class Student {
     @PrimaryKey
     @NotNull
