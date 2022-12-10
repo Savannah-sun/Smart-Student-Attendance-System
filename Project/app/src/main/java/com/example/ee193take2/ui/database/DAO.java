@@ -1,5 +1,6 @@
 package com.example.ee193take2.ui.database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -20,7 +21,7 @@ public interface DAO {
 
     //list all student
     @Query("SELECT * FROM student_table")
-    List<Student> getStudent();
+    LiveData<List<Student>> getStudent();
 
     //insert one student per time
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -28,7 +29,7 @@ public interface DAO {
 
     //clear the table
     @Query("DELETE FROM student_table")
-    void deleteAll();
+    void deleteAllStudents();
 
     @Update
     void updateStudent(Student student);
@@ -38,11 +39,11 @@ public interface DAO {
 
     //search student by the student name
     @Query("SELECT * FROM student_table where last_name = :last_name AND first_name = :first_name")
-    List<Student> getByName(String first_name, String last_name);
+    LiveData<List<Student>> getByName(String first_name, String last_name);
 
     //Search student by the student id
     @Query("SELECT * FROM student_table where student_id = :studentID")
-    Student getByID(int studentID);
+    LiveData<Student> getByID(int studentID);
 
     /**------------------------------course methods----------------------------------------------**/
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -56,11 +57,11 @@ public interface DAO {
 
     //get all courses
     @Query("SELECT * FROM course_table")
-    List<Course> getAlphabetizedCourses();
+    LiveData<List<Course>> getAlphabetizedCourses();
 
     //search the course through its id
     @Query("SELECT * FROM course_table WHERE course_id = :courseID")
-    Course getCourseByID(int courseID);
+    LiveData<Course> getCourseByID(int courseID);
 
     //delete all course
     @Query("DELETE FROM course_table")
@@ -69,11 +70,11 @@ public interface DAO {
     /**-------------------------Course offering methods------------------------------------------**/
     //display all courseOffering
     @Query("SELECT * FROM courseOffering_table")
-    List<CourseOffering> getCourseOffering();
+    LiveData<List<CourseOffering>> getCourseOffering();
 
     //display CourseOffering by courseID
     @Query("SELECT * FROM courseOffering_table WHERE cid=:courseID")
-    List<CourseOffering> getCourseOfferingByCourseID(int courseID);
+    LiveData<List<CourseOffering>> getCourseOfferingByCourseID(int courseID);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertClassOffering(CourseOffering classOffering);
@@ -95,13 +96,13 @@ public interface DAO {
     @Query("SELECT * FROM student_table as s INNER JOIN studentclassoffering_table as sc " +
             "ON s.student_id = sc.student_id iNNER JOIN courseOffering_table as c ON " +
             "sc.courseOffering_id = c.cid WHERE c.cid= :courseOfferingID")
-    List<Student> getStudentByClassOfferingID(int courseOfferingID);
+    LiveData<List<Student>> getStudentByClassOfferingID(int courseOfferingID);
 
     //Display a student's Courseoffering list
     @Query("SELECT * FROM courseOffering_table as c INNER JOIN studentclassoffering_table as sc " +
             "ON c.cid = sc.courseOffering_id iNNER JOIN student_table as s ON " +
             "s.student_id = sc.student_id WHERE s.student_id = :id")
-    List<CourseOffering> getClassOfferingByStudentID(int id);
+    LiveData<List<CourseOffering>> getClassOfferingByStudentID(int id);
 
     /**------------------------------Calendar Table------------------------------------------------**/
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -113,12 +114,12 @@ public interface DAO {
     //display course offering's calendar by course offering ID
     @Query("SELECT date FROM calendar_table as ct INNER JOIN courseOffering_table as co " +
             "ON ct.courseOffering_id = co.cid WHERE co.cid = :courseOfferingID ORDER BY date DESC")
-    List<Date> getCalendarByCourseOfferingID(int courseOfferingID);
+    LiveData<List<Date>> getCalendarByCourseOfferingID(int courseOfferingID);
 
     //display the list of course offering by the date
     @Query("SELECT * FROM courseOffering_table as co INNER JOIN calendar_table as ct ON " +
             "co.cid = ct.courseOffering_id WHERE ct.date = :date")
-    List<CourseOffering> getCourseOfferingByDate(Date date);
+    LiveData<List<CourseOffering>> getCourseOfferingByDate(Date date);
 
     /**-------------------------------Attendance Table----------------------------------------------**/
 
@@ -134,13 +135,13 @@ public interface DAO {
     //get a student's attendance on a specific date and course offering id
     @Query("SELECT attend FROM attendance_table WHERE student_id = :student_id " +
             "AND date = :date AND courseOffering_id = :courseOffering_id")
-    Boolean getAllAttendanceByStudentIDDateCourseOffering(Date date, int student_id, int courseOffering_id);
+    LiveData<Boolean> getAllAttendanceByStudentIDDateCourseOffering(Date date, int student_id, int courseOffering_id);
 
     //from date start to date end, for a specific course offering id, get that day's all student attendance,
     // the number of result represents the number of presence that day
     @Query("SELECT COUNT(attend) FROM attendance_table WHERE date >= :start AND date <= :end " +
             "AND courseOffering_id = :courseOffering_id")
-    List<Integer> getAttendPerformanceByTime(Date start, Date end, int courseOffering_id);
+    LiveData<List<Integer>> getAttendPerformanceByTime(Date start, Date end, int courseOffering_id);
 
     /**--------------------------------User-------------------------------------------------------**/
 //    @Insert(onConflict = OnConflictStrategy.IGNORE)

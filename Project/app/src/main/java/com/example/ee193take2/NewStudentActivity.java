@@ -12,7 +12,7 @@ public class NewStudentActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";
 
-    private EditText mEditWordView, mEditLastName;
+    private EditText mEditWordView, mEditLastName,mEditEmail,mEditStatus,mEditPayment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,6 +20,10 @@ public class NewStudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_student);
         mEditWordView = findViewById(R.id.edit_word);
         mEditLastName = findViewById(R.id.edit_last_name);
+        mEditEmail = findViewById(R.id.email);
+        mEditStatus = findViewById(R.id.status);
+        mEditPayment = findViewById(R.id.payment);
+
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(view -> {
@@ -27,10 +31,14 @@ public class NewStudentActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(mEditWordView.getText())) {
                 setResult(RESULT_CANCELED, replyIntent);
             } else {
-                String word = mEditWordView.getText().toString();
+                String name = mEditWordView.getText().toString();
                 String lastName = mEditLastName.getText().toString();
-                String[] names = {word,lastName};
-                replyIntent.putExtra(EXTRA_REPLY, names);
+                String email = mEditEmail.getText().toString();
+                String status = mEditStatus.getText().toString();
+                String payment = mEditPayment.getText().toString();
+
+                String[] student_info = {name,lastName,email,status,payment};
+                replyIntent.putExtra(EXTRA_REPLY, student_info);
                 setResult(RESULT_OK, replyIntent);
             }
             finish();
