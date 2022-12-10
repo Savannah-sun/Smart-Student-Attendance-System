@@ -19,7 +19,7 @@ public class Student {
     @PrimaryKey
     @NotNull
     @ColumnInfo(name = "student_id")
-    private int uid;
+    private int student_id;
 
     @ColumnInfo(name = "first_name")
     private String firstName;
@@ -37,11 +37,11 @@ public class Student {
     private String status;
 
     public int getUid() {
-        return uid;
+        return student_id;
     }
 
     public void setUid(int uid) {
-        this.uid = uid;
+        this.student_id = uid;
     }
 
     public String getFirstName() {
@@ -63,8 +63,8 @@ public class Student {
     @ColumnInfo(name = "payment")
     private String payment;
 
-    public Student(int uid, String firstName, String lastName, String email, String status, String payment) {
-        this.uid = uid;
+    public Student(int student_id, String firstName, String lastName, String email, String status, String payment) {
+        this.student_id = student_id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -99,7 +99,7 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "uid=" + uid +
+                "uid=" + student_id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
