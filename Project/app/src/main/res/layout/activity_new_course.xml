@@ -7,41 +7,12 @@
 
 
     <EditText
-        android:id="@+id/edit_word"
-        android:layout_width="379dp"
-        android:layout_marginLeft="16dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:hint="First Name"
-        android:inputType="textAutoComplete"
-        android:minHeight="@dimen/min_height"
-        android:textSize="18sp" />
-
-    <EditText
-        android:id="@+id/courseID"
-        android:layout_width="379dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:ems="10"
-        android:hint="Last Name"
-        android:inputType="textPersonName" />
-
-    <EditText
         android:id="@+id/className"
         android:layout_width="379dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/course_status"
-        android:layout_width="379dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:ems="10"
-        android:hint="Student Status"
+        android:hint="Class Name"
         android:inputType="textPersonName" />
 
     <EditText
@@ -50,8 +21,15 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:ems="10"
-        android:hint="Payment"
+        android:hint="Number of Offerings"
         android:inputType="textPersonName" />
+
+    <CheckBox
+        android:id="@+id/course_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Is Offered?"
+        android:translationX="10dp" />
 
     <Button
         android:id="@+id/button_save"
