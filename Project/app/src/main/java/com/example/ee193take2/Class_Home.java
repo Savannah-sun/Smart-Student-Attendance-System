@@ -57,8 +57,8 @@ public class Class_Home extends Fragment {
         adapter = new CourseListAdapter(new CourseListAdapter.CourseDiff());
         courseView.setAdapter(adapter);
 
-
         dbViewModel = new ViewModelProvider(this).get(DBViewModel .class);
+
 
         /* Add Class */
         binding.addClassButton.setOnClickListener(new View.OnClickListener() {
