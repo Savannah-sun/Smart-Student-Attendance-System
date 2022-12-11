@@ -19,10 +19,10 @@ public class NewStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_student);
         mEditWordView = findViewById(R.id.edit_word);
-        mEditLastName = findViewById(R.id.edit_last_name);
-        mEditEmail = findViewById(R.id.email);
-        mEditStatus = findViewById(R.id.status);
-        mEditPayment = findViewById(R.id.payment);
+        mEditLastName = findViewById(R.id.courseID);
+        mEditEmail = findViewById(R.id.className);
+        mEditStatus = findViewById(R.id.course_status);
+        mEditPayment = findViewById(R.id.numOfferings);
 
 
         final Button button = findViewById(R.id.button_save);

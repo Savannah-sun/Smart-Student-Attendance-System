@@ -72,8 +72,8 @@ public class Class_Home extends Fragment {
 
         Button add_class = rootView.findViewById(R.id.add_class_button);
         add_class.setOnClickListener( view -> {
-            Intent intent =new Intent(getActivity(), NewStudentActivity.class);
-            studentActivityLauncher.launch(intent);
+            Intent intent =new Intent(getActivity(), NewCourseActivity.class);
+            CourseActivityLauncher.launch(intent);
         });
 
 
@@ -112,16 +112,17 @@ public class Class_Home extends Fragment {
 
     }
 
-    ActivityResultLauncher<Intent> studentActivityLauncher = registerForActivityResult(
+    ActivityResultLauncher<Intent> CourseActivityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult results) {
                     if (results.getResultCode() == Activity.RESULT_OK) {
                         Intent data = results.getData();
-                        Student student = new Student(1,data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[1], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[0],
-                                data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[2], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[3], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[4]);
-                        dbViewModel.insertStudent(student);
+//
+
+                        Course course = new Course(100,data.getStringExtra("class_name"),data.getBooleanExtra("status",true),data.getIntExtra("numOfferings",0));
+                        dbViewModel.insertCourse(course);
                     } else {
                         Toast.makeText(
                                 thisContext,

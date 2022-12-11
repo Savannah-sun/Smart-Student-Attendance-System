@@ -23,70 +23,70 @@ public class Class_Info extends Fragment {
         binding = FragmentClassInfoBinding.inflate(inflater, container, false);
 
 
-        /* Text Field For Class Name */
-
-
-        /* Offering List */
-        binding.buttonOfferingList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//              pass class id in the instructor?
-                Class_Offerings class_offer = new Class_Offerings();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.replaceContainer, class_offer);
-                transaction.commit();
-            }
-        });
-
-
-
-        /* Statistics */
-        /* Offering List */
-        binding.buttonStatistics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                class_Statistics class_stats = new class_Statistics();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.replaceContainer, class_stats);
-                transaction.commit();
-            }
-        });
-
-
-
-        /* Students */
-        binding.buttonStudents.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Class_Students class_students = new Class_Students();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.replaceContainer, class_students);
-                transaction.commit();
-            }
-        });
-
-
-        /* Edit Class */
-        binding.buttonEditClass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Add_Class add_class = new Add_Class();
+//        /* Text Field For Class Name */
+//
+//
+//        /* Offering List */
+//        binding.buttonOfferingList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////              pass class id in the instructor?
+//                Class_Offerings class_offer = new Class_Offerings();
 //                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.replaceContainer, add_class);
+//                transaction.replace(R.id.replaceContainer, class_offer);
 //                transaction.commit();
-            }
-        });
-
-        /* Delete Class */
-        binding.buttonDeleteClass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Add_Class add_class = new Add_Class();
+//            }
+//        });
+//
+//
+//
+//        /* Statistics */
+//        /* Offering List */
+//        binding.buttonStatistics.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                class_Statistics class_stats = new class_Statistics();
 //                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.replaceContainer, add_class);
+//                transaction.replace(R.id.replaceContainer, class_stats);
 //                transaction.commit();
-            }
-        });
+//            }
+//        });
+//
+//
+//
+//        /* Students */
+//        binding.buttonStudents.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Class_Students class_students = new Class_Students();
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                transaction.replace(R.id.replaceContainer, class_students);
+//                transaction.commit();
+//            }
+//        });
+//
+//
+//        /* Edit Class */
+//        binding.buttonEditClass.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Add_Class add_class = new Add_Class();
+////                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+////                transaction.replace(R.id.replaceContainer, add_class);
+////                transaction.commit();
+//            }
+//        });
+//
+//        /* Delete Class */
+//        binding.buttonDeleteClass.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Add_Class add_class = new Add_Class();
+////                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+////                transaction.replace(R.id.replaceContainer, add_class);
+////                transaction.commit();
+//            }
+      //  });
 
 
 
