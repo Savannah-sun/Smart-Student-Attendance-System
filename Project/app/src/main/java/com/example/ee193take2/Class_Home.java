@@ -1,8 +1,14 @@
 package com.example.ee193take2;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,13 +22,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.ee193take2.databinding.ActivityMainBinding;
 import com.example.ee193take2.databinding.FragmentClassHomeBinding;
 import com.example.ee193take2.ui.course.CourseListAdapter;
 import com.example.ee193take2.ui.database.Course;
 import com.example.ee193take2.ui.database.DBViewModel;
+import com.example.ee193take2.ui.database.Student;
 import com.example.ee193take2.ui.student.StudentListAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import pl.com.salsoft.sqlitestudioremote.SQLiteStudioService;
 
@@ -57,18 +67,13 @@ public class Class_Home extends Fragment {
         adapter = new CourseListAdapter(new CourseListAdapter.CourseDiff());
         courseView.setAdapter(adapter);
 
-        dbViewModel = new ViewModelProvider(this).get(DBViewModel .class);
+        dbViewModel = new ViewModelProvider(this).get(DBViewModel.class);
 
 
-        /* Add Class */
-        binding.addClassButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Add_Class add_class = new Add_Class();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.replaceContainer, add_class);
-                transaction.commit();
-            }
+        Button add_class = rootView.findViewById(R.id.add_class_button);
+        add_class.setOnClickListener( view -> {
+            Intent intent =new Intent(getActivity(), NewStudentActivity.class);
+            studentActivityLauncher.launch(intent);
         });
 
 
@@ -106,5 +111,24 @@ public class Class_Home extends Fragment {
 
 
     }
+
+    ActivityResultLauncher<Intent> studentActivityLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult results) {
+                    if (results.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = results.getData();
+                        Student student = new Student(1,data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[1], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[0],
+                                data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[2], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[3], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[4]);
+                        dbViewModel.insertStudent(student);
+                    } else {
+                        Toast.makeText(
+                                thisContext,
+                                R.string.empty_not_saved,
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
 }
