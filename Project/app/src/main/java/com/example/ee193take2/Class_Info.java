@@ -1,5 +1,6 @@
 package com.example.ee193take2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 import com.example.ee193take2.databinding.FragmentClassInfoBinding;
@@ -15,13 +17,14 @@ import com.example.ee193take2.databinding.FragmentClassInfoBinding;
 public class Class_Info extends Fragment {
 
     FragmentClassInfoBinding binding;
+    private View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         binding = FragmentClassInfoBinding.inflate(inflater, container, false);
-
+        rootView = inflater.inflate(R.layout.fragment_class__home ,container, false);
 
 //        /* Text Field For Class Name */
 //
@@ -37,6 +40,12 @@ public class Class_Info extends Fragment {
                 transaction.commit();
             }
         });
+
+//        Button add_course_offering = rootView.findViewById(R.id.add_class_button);
+//        add_class.setOnClickListener( view -> {
+//            Intent intent =new Intent(getActivity(), NewCourseActivity.class);
+//            CourseOfferingActivityLauncher.launch(intent);
+//        });
 //
 //
 //

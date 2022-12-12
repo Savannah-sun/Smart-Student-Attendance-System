@@ -1,32 +1,32 @@
 package com.example.ee193take2;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.ee193take2.ui.database.Course;
+import com.example.ee193take2.ui.database.CourseOffering;
 import com.example.ee193take2.ui.database.DBViewModel;
-import com.google.android.material.snackbar.Snackbar;
 
-import androidx.annotation.Nullable;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.ee193take2.databinding.ActivityClassOfferingsBinding;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Class_Offerings_Activity extends AppCompatActivity {
 
@@ -38,6 +38,7 @@ public class Class_Offerings_Activity extends AppCompatActivity {
     private EditText mClass_Name,mNumOfferings;
     private CheckBox mStatus;
     private DBViewModel dbViewModel;
+    AtomicInteger course_id = new AtomicInteger();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,10 +63,19 @@ public class Class_Offerings_Activity extends AppCompatActivity {
         TextView text = findViewById(R.id.test_text);
         text.setText(course_name);
 
+
         LiveData<Course> this_course = dbViewModel.getCourseByName(course_name);
 
+        this_course.observe(this, course ->{
+            course_id.set(course.getCourse_id());
+        });
 
 
+        Button add_course_offering = findViewById(R.id.button_new_offering);
+        add_course_offering.setOnClickListener( view -> {
+            Intent intent =new Intent(this, NewCourseOfferingActivity.class);
+            NewCourseOfferingActivityLauncher.launch(intent);
+        });
 
 //        final Button button = findViewById(R.id.button_save);
 //        button.setOnClickListener(view -> {
@@ -87,5 +97,21 @@ public class Class_Offerings_Activity extends AppCompatActivity {
 //        });
     }
 
+    ActivityResultLauncher<Intent> NewCourseOfferingActivityLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult results) {
+                    if (results.getResultCode() == Activity.RESULT_OK) {
+                        Log.d("Debug", "Return Results");
+                        Intent data = results.getData();
+                        int num_students =  data.getIntExtra("num_students",0);
+                        String classroom_name = data.getStringExtra("classroom_num");
+
+                        CourseOffering course_off = new CourseOffering(course_id.intValue(),classroom_name,num_students);
+                        dbViewModel.insertClassOffering(course_off);
+                    }
+                }
+            });
 
 }

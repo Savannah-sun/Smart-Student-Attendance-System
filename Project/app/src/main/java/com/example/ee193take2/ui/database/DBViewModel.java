@@ -112,7 +112,7 @@ private LiveData<List<Course>> mAllCourses;
     }
 
 
-    void insertClassOffering(CourseOffering classOffering){
+    public void insertClassOffering(CourseOffering classOffering){
             DAOdatabase.databaseWriteExecutor.execute(() -> {
             mDAO.insertClassOffering(classOffering);
             });
