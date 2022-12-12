@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.ee193take2.ui.database.Course;
 import com.example.ee193take2.ui.database.Student;
 import com.example.ee193take2.ui.database.DBViewModel;
 import com.example.ee193take2.ui.student.StudentListAdapter;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         dbViewModel.deleteAllStudents();
-
+        dbViewModel.deleteAllCourse();
 
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
