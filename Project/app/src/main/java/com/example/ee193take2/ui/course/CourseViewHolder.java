@@ -58,11 +58,11 @@ class CourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickLi
 
     @Override
     public void onClick(View v){
-        Log.d("Testing", this.courseItemView.getText().toString());
+        String course_name = this.courseItemView.getText().toString();
         //Launch Activity..
         Context currActivity = this.courseItemView.getContext();
-        Log.d("Testing", this.courseItemView.getContext().toString());
         Intent intent = new Intent(currActivity, Class_Offerings_Activity.class);
+        intent.putExtra("course_name" , course_name);
         currActivity.startActivity(intent);
 
 

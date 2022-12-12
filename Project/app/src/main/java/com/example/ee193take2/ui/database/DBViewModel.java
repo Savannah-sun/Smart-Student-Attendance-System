@@ -97,8 +97,11 @@ private LiveData<List<Course>> mAllCourses;
         });
     }
 
+    public LiveData<Course> getCourseByName(String course_name){
+        return mDAO.getCourseByName(course_name);
+    }
 
-/**-------------------------------Course Offering View Model ----------------------------------------------**/
+    /**-------------------------------Course Offering View Model ----------------------------------------------**/
 
 
     LiveData<List<CourseOffering>> getCourseOffering(){return mDAO.getCourseOffering();}

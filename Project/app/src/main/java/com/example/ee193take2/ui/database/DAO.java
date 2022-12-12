@@ -63,6 +63,10 @@ public interface DAO {
     @Query("SELECT * FROM course_table WHERE course_id = :courseID")
     LiveData<Course> getCourseByID(int courseID);
 
+    //search the course through its id
+    @Query("SELECT * FROM course_table WHERE class_name = :classname")
+    LiveData<Course> getCourseByName(String classname);
+
     //delete all course
     @Query("DELETE FROM course_table")
     void deleteAllCourse();
