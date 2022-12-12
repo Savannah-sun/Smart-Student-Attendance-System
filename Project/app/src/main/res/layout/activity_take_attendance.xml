@@ -5,14 +5,14 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Class_Offerings_Activity">
+    tools:context=".TakeAttendanceActivity">
 
     <TextView
-        android:id="@+id/class_info_header"
+        android:id="@+id/student_info_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Class Info"
+        android:text="Student Info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,16 +40,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.386" />
 
-    <TextView
-        android:id="@+id/test_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/addStudent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/recyclerView2"
-        app:layout_constraintTop_toTopOf="@+id/class_info_header"
-        app:layout_constraintVertical_bias="0.050000012" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
