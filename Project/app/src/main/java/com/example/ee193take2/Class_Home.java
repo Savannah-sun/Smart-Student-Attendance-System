@@ -34,6 +34,8 @@ import com.example.ee193take2.ui.database.Student;
 import com.example.ee193take2.ui.student.StudentListAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Random;
+
 import pl.com.salsoft.sqlitestudioremote.SQLiteStudioService;
 
 
@@ -119,7 +121,8 @@ public class Class_Home extends Fragment {
                 public void onActivityResult(ActivityResult results) {
                     if (results.getResultCode() == Activity.RESULT_OK) {
                         Intent data = results.getData();
-                        Course course = new Course(100,data.getStringExtra("class_name"),data.getBooleanExtra("status",true),data.getIntExtra("numOfferings",0));
+                        Random random = new Random();
+                        Course course = new Course(random.nextInt(1000), data.getStringExtra("class_name"),data.getBooleanExtra("status",true),data.getIntExtra("numOfferings",0));
                         dbViewModel.insertCourse(course);
                     } else {
                         Toast.makeText(
