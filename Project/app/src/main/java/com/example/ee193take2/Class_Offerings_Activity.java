@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.ee193take2.ui.course_offering.CourseOfferingListAdapter;
 import com.example.ee193take2.ui.database.Course;
 import com.example.ee193take2.ui.database.CourseOffering;
 import com.example.ee193take2.ui.database.DBViewModel;
@@ -23,6 +24,8 @@ import android.widget.TextView;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ee193take2.databinding.ActivityClassOfferingsBinding;
 
@@ -52,6 +55,16 @@ public class Class_Offerings_Activity extends AppCompatActivity {
         dbViewModel = new ViewModelProvider(this).get(DBViewModel.class);
 
 
+        RecyclerView recyclerView = findViewById((R.id.recyclerView2));
+        final CourseOfferingListAdapter adapter = new CourseOfferingListAdapter(new CourseOfferingListAdapter.CourseDiff());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        dbViewModel.getCourseOffering().observe(this, courseofferings -> {
+            adapter.submitList(courseofferings);
+        });
+
 //        mClass_Name = findViewById(R.id.className);
 //        mStatus = findViewById(R.id.course_status);
 //        mNumOfferings = findViewById(R.id.numOfferings);
@@ -71,7 +84,7 @@ public class Class_Offerings_Activity extends AppCompatActivity {
         });
 
 
-        Button add_course_offering = findViewById(R.id.button_new_offering);
+        Button add_course_offering = findViewById(R.id.addStudent);
         add_course_offering.setOnClickListener( view -> {
             Intent intent =new Intent(this, NewCourseOfferingActivity.class);
             NewCourseOfferingActivityLauncher.launch(intent);

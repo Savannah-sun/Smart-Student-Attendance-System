@@ -1,46 +1,44 @@
-package com.example.ee193take2.ui.course;
+package com.example.ee193take2.ui.course_offering;
 
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
 import com.example.ee193take2.ui.database.Course;
+import com.example.ee193take2.ui.database.CourseOffering;
 
 
-public class CourseListAdapter extends ListAdapter<Course, CourseViewHolder> {
+public class CourseOfferingListAdapter extends ListAdapter<CourseOffering, CourseOfferingViewHolder> {
 
 
-    public CourseListAdapter(@NonNull DiffUtil.ItemCallback<Course> diffCallback){
+    public CourseOfferingListAdapter(@NonNull DiffUtil.ItemCallback<CourseOffering> diffCallback){
         super(diffCallback);
     }
 
     @Override
-    public CourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return CourseViewHolder.create(parent);
+    public CourseOfferingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return CourseOfferingViewHolder.create(parent);
     }
 
 
     @Override
-    public void onBindViewHolder(CourseViewHolder holder, int position){
-        Course current = getItem(position);
-        holder.bind(current.getClass_name())
-        ;
+    public void onBindViewHolder(CourseOfferingViewHolder holder, int position){
+        CourseOffering current = getItem(position);
+        holder.bind("Classroom " + current.getClassroom());
     }
 
-    public static class CourseDiff extends DiffUtil.ItemCallback<Course>{
+    public static class CourseDiff extends DiffUtil.ItemCallback<CourseOffering>{
 
         @Override
-        public boolean areItemsTheSame(@NonNull Course oldItem, @NonNull Course newItem){
+        public boolean areItemsTheSame(@NonNull CourseOffering oldItem, @NonNull CourseOffering newItem){
             return oldItem == newItem;
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull Course oldItem, @NonNull Course newItem){
-            return oldItem.getClass_name().equals(newItem.getClass_name());
+        public boolean areContentsTheSame(@NonNull CourseOffering oldItem, @NonNull CourseOffering newItem){
+            return oldItem.getClassroom().equals(newItem.getClassroom());
         }
     }
 

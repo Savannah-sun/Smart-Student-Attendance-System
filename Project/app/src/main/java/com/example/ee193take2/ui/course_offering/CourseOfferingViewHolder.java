@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ee193take2.Class_Offerings_Activity;
+import com.example.ee193take2.CourseOfferingDisplayActivity;
 import com.example.ee193take2.R;
 
 class CourseOfferingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -38,7 +39,12 @@ class CourseOfferingViewHolder extends RecyclerView.ViewHolder implements View.O
     @Override
     public void onClick(View v){
         Log.d("Testing","Course offering clicked");
-
+        String classroom = this.courseItemView.getText().toString();
+        Context currActivity = this.courseItemView.getContext();
+        Intent intent = new Intent(currActivity, CourseOfferingDisplayActivity.class);
+        intent.putExtra("course_id", 1);
+        intent.putExtra("cid",2);
+        currActivity.startActivity(intent);
 
     }
 
