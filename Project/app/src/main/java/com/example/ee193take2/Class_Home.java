@@ -2,6 +2,7 @@ package com.example.ee193take2;
 
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -27,6 +28,19 @@ public class Class_Home extends Fragment {
         binding = FragmentClassHomeBinding.inflate(inflater, container, false);
 
 
+        /* Home Button that Persists */
+        binding.buttonHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                ((ConstraintLayout) findViewById(R.id.replaceContainer)).removeAllViews();
+                Class_Home class_info = new Class_Home();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.replaceContainer, class_info);
+                transaction.commit();
+            }
+        });
+
+
         /* Add Class */
         binding.addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +63,8 @@ public class Class_Home extends Fragment {
                 transaction.commit();
             }
         });
+
+
 
 
 
