@@ -26,6 +26,16 @@
             app:layout_constraintVertical_bias="0.01999998" />
 
         <Button
+            android:id="@+id/button_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/replaceContainer" />
+
+        <Button
             android:id="@+id/add_class_button"
             android:layout_width="117dp"
             android:layout_height="52dp"
