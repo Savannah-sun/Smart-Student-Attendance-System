@@ -35,7 +35,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Random;
 
-import com.example.ee193take2.databinding.FragmentClassInfoBinding;
+//import com.example.ee193take2.databinding.FragmentClassInfoBinding;
 import pl.com.salsoft.sqlitestudioremote.SQLiteStudioService;
 
 
