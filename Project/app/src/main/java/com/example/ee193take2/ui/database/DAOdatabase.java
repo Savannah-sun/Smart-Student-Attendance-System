@@ -13,7 +13,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Student.class, Course.class, CourseOffering.class, StudentClassOffering.class, CalendarCourseOffering.class, Attendance.class},version = 1)
+@Database(entities = {Student.class, Course.class, CourseOffering.class, StudentClassOffering.class, CalendarCourseOffering.class, Attendance.class},version = 2)
 @TypeConverters({Converters.class})
 public abstract class DAOdatabase extends RoomDatabase {
     public abstract DAO DAO();
@@ -30,6 +30,7 @@ public abstract class DAOdatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     DAOdatabase.class, "app_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

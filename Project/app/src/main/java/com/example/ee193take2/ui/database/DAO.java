@@ -91,14 +91,14 @@ public interface DAO {
     void updateClassOffering(CourseOffering classOffering);
 
     @Delete
-    void deleteClassOffering(CourseOffering classOffering);
+    public void deleteClassOffering(CourseOffering classOffering);
 
     /**-------------------------Student and ClassOffering methods----------------------------------**/
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertStudentAndClassOffering(StudentClassOffering studentClassOffering);
 
     @Delete
-    void deleteStudentAndClassOffering(StudentClassOffering studentClassOffering);
+    public void deleteStudentAndClassOffering(StudentClassOffering studentClassOffering);
 
     //display student information by classOffering ID
     @Query("SELECT * FROM student_table as s INNER JOIN studentclassoffering_table as sc " +

@@ -48,6 +48,7 @@ class CourseOfferingViewHolder extends RecyclerView.ViewHolder implements View.O
         Context currActivity = this.courseItemView.getContext();
         Intent intent = new Intent(currActivity, CourseOfferingDisplayActivity.class);
         intent.putExtra("course_id", Integer.parseInt(strArray[0]));
+        intent.putExtra("classroom",strArray[2]);
         currActivity.startActivity(intent);
 
     }
