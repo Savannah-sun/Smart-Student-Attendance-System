@@ -77,8 +77,12 @@ public interface DAO {
     LiveData<List<CourseOffering>> getCourseOffering();
 
     //display CourseOffering by courseID
-    @Query("SELECT * FROM courseOffering_table WHERE cid=:courseID")
+    @Query("SELECT * FROM courseOffering_table WHERE course_id =:courseID")
     LiveData<List<CourseOffering>> getCourseOfferingByCourseID(int courseID);
+
+    @Query("SELECT * FROM courseOffering_table as co INNER JOIN course_table as c ON " +
+            "c.course_id = co.course_id WHERE c.class_name = :class_name")
+    LiveData<List<CourseOffering>> getCourseOfferingByCourseName(String class_name);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertClassOffering(CourseOffering classOffering);

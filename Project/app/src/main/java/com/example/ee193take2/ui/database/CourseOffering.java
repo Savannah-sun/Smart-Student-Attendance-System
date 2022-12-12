@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey;
                 childColumns = "course_id",
                 onDelete = CASCADE))
 public class CourseOffering {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int cid;
 
     @ColumnInfo
@@ -67,8 +67,7 @@ public class CourseOffering {
                 '}';
     }
 
-    public CourseOffering(int cid, int course_id, String classroom, int studentNum) {
-        this.cid = cid;
+    public CourseOffering(int course_id, String classroom, int studentNum) {
         this.course_id = course_id;
         this.classroom = classroom;
         this.studentNum = studentNum;
