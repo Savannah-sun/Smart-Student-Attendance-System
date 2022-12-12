@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
             adapter.submitList(students);
         });
 
-        dbViewModel.deleteAllStudents();
-        dbViewModel.deleteAllCourse();
 
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

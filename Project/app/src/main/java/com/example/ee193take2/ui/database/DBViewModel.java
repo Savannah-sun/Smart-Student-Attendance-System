@@ -2,6 +2,7 @@ package com.example.ee193take2.ui.database;
 
 import android.app.Application;
 
+import androidx.annotation.WorkerThread;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -12,16 +13,19 @@ import java.util.List;
 public class DBViewModel extends AndroidViewModel {
 
     private DAO mDAO;
-
+    DAOdatabase db;
 
     public DBViewModel(Application application) {
         super(application);
-        DAOdatabase db = DAOdatabase.getDatabase(application);
+        db = DAOdatabase.getDatabase(application);
         mDAO = db.DAO();
         mAllStudents = mDAO.getStudent();
         mAllCourses = mDAO.getAlphabetizedCourses();
     }
-
+//    @WorkerThread
+//    public void ClearData(){
+//        db.clearAllTables();
+//    }
 /**-------------------------------Student View Model ----------------------------------------------**/
 
     public LiveData<List<Student>> getAllStudents() {
@@ -29,6 +33,7 @@ public class DBViewModel extends AndroidViewModel {
     }
 
     private LiveData<List<Student>> mAllStudents;
+
 
     public void insertStudent(Student student) {
         DAOdatabase.databaseWriteExecutor.execute(()->{
@@ -125,7 +130,7 @@ private LiveData<List<Course>> mAllCourses;
         });
     };
 
-    void deleteClassOffering(CourseOffering classOffering){
+    public void deleteClassOffering(CourseOffering classOffering){
         DAOdatabase.databaseWriteExecutor.execute(()-> {
             mDAO.deleteClassOffering(classOffering);
         });
@@ -140,7 +145,7 @@ private LiveData<List<Course>> mAllCourses;
         });
     }
 
-    void deleteStudentAndClassOffering(StudentClassOffering studentClassOffering){
+   public void deleteStudentAndClassOffering(StudentClassOffering studentClassOffering){
         DAOdatabase.databaseWriteExecutor.execute(()->{
             mDAO.insertStudentAndClassOffering(studentClassOffering);
         });

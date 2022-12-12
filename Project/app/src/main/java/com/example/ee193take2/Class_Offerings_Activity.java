@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ee193take2.databinding.ActivityClassOfferingsBinding;
 
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Class_Offerings_Activity extends AppCompatActivity {
@@ -42,10 +43,12 @@ public class Class_Offerings_Activity extends AppCompatActivity {
     private CheckBox mStatus;
     private DBViewModel dbViewModel;
     AtomicInteger course_id = new AtomicInteger();
+    Random random;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        random = new Random();
 
         binding = ActivityClassOfferingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -123,7 +126,7 @@ public class Class_Offerings_Activity extends AppCompatActivity {
                         int num_students =  data.getIntExtra("num_students",0);
                         String classroom_name = data.getStringExtra("classroom_num");
 
-                        CourseOffering course_off = new CourseOffering(course_id.intValue(),classroom_name,num_students);
+                        CourseOffering course_off = new CourseOffering(random.nextInt(100),course_id.intValue(),classroom_name,num_students);
                         dbViewModel.insertClassOffering(course_off);
                     }
                 }

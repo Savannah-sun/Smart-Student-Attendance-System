@@ -1,6 +1,7 @@
 package com.example.ee193take2;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -20,15 +21,23 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ee193take2.ui.database.Student;
+import com.example.ee193take2.ui.database.StudentClassOffering;
 import com.example.ee193take2.ui.student.StudentListAdapter;
 
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -38,15 +47,20 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
     private ActivityClassOfferingDisplayBinding binding;
 
     public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";
-
+    private Random random;
     private EditText mClass_Name,mNumOfferings;
     private CheckBox mStatus;
     private DBViewModel dbViewModel;
-    AtomicInteger course_id = new AtomicInteger();
+    private LifecycleOwner ctx;
+    int course_id;
+    AtomicInteger cid = new AtomicInteger();
+    String classroom;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        random = new Random();
         super.onCreate(savedInstanceState);
+        ctx= this;
 
         binding = ActivityClassOfferingDisplayBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -57,8 +71,8 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
 
         AtomicReference<String> class_name = new AtomicReference<String>();
 
-        int course_id = getIntent().getIntExtra("course_id",0);
-        int cid = getIntent().getIntExtra("cid",0);
+        course_id = getIntent().getIntExtra("course_id", 0);
+        classroom = getIntent().getStringExtra("classroom");
         Log.d("here", Integer.toString(course_id));
 
 
@@ -66,31 +80,37 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
 
         LiveData<Course> this_course = dbViewModel.getCourseByID(course_id);
 
-        this_course.observe(this, course ->{
+        this_course.observe(this, course -> {
             class_name.set(course.getClass_name());
+            text.setText(class_name.toString());
+
         });
-
-        text.setText(class_name.toString());
-
 
         RecyclerView recyclerView = findViewById((R.id.recyclerView2));
         final StudentListAdapter adapter = new StudentListAdapter(new StudentListAdapter.StudentDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        dbViewModel = new ViewModelProvider(this).get(DBViewModel.class);
+        LiveData<List<CourseOffering>> course_list = dbViewModel.getCourseOfferingByCourseID(course_id);
 
-        dbViewModel.getStudentByClassOfferingID(cid).observe(this, students -> {
-            adapter.submitList(students);
+        course_list.observe(this, courselist -> {
+            for (CourseOffering course: courselist) {
+                if (course.getClassroom().equals(classroom)) {
+                    cid.set(course.getCid());
+                    dbViewModel.getStudentByClassOfferingID(cid.intValue()).observe(this, students -> {
+                        adapter.submitList(students);
+                    });
+                }
+            }
         });
 
 
-
         Button add_course_offering = findViewById(R.id.addStudent);
-//        add_course_offering.setOnClickListener( view -> {
-//            Intent intent =new Intent(this, NewCourseOfferingActivity.class);
-//            NewCourseOfferingActivityLauncher.launch(intent);
-//        });
+        add_course_offering.setOnClickListener(view -> {
+            Intent intent = new Intent(this, NewStudentActivity.class);
+            NewStudentActivityResultLauncher.launch(intent);
+        });
+    }
 
 //        final Button button = findViewById(R.id.button_save);
 //        button.setOnClickListener(view -> {
@@ -110,23 +130,37 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
 //            }
 //            finish();
 //        });
-    }
 
-//    ActivityResultLauncher<Intent> NewCourseOfferingActivityLauncher = registerForActivityResult(
-//            new ActivityResultContracts.StartActivityForResult(),
-//            new ActivityResultCallback<ActivityResult>() {
-//                @Override
-//                public void onActivityResult(ActivityResult results) {
-//                    if (results.getResultCode() == Activity.RESULT_OK) {
-//                        Log.d("Debug", "Return Results");
-//                        Intent data = results.getData();
-//                        int num_students =  data.getIntExtra("num_students",0);
-//                        String classroom_name = data.getStringExtra("classroom_num");
-//
-//                        CourseOffering course_off = new CourseOffering(course_id.intValue(),classroom_name,num_students);
-//                        dbViewModel.insertClassOffering(course_off);
-//                    }
-//                }
-//            });
+
+    ActivityResultLauncher<Intent> NewStudentActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult results) {
+                    if (results.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = results.getData();
+                        Student student = new Student(random.nextInt(1000),data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[1], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[0],
+                                data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[2], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[3], data.getStringArrayExtra(NewStudentActivity.EXTRA_REPLY)[4]);
+                        dbViewModel.insertStudent(student);
+                        dbViewModel.getCourseOfferingByCourseID(course_id).observe(ctx, courselist ->{
+                            Log.d("TEST", classroom);
+                            for (CourseOffering course: courselist) {
+                                Log.d("TEST", course.getClassroom());
+                                if (course.getClassroom().equals(classroom)) {
+                                    cid.set(course.getCid());
+                                    dbViewModel.insertStudentAndClassOffering(new StudentClassOffering(student.getStudent_id(), cid.intValue()));
+                                }
+                            }
+                        });
+
+                    } else {
+                        Toast.makeText(
+                                getApplicationContext(),
+                                R.string.empty_not_saved,
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
 }
+
