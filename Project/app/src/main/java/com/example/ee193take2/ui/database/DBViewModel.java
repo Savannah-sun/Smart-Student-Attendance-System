@@ -104,7 +104,7 @@ private LiveData<List<Course>> mAllCourses;
     /**-------------------------------Course Offering View Model ----------------------------------------------**/
 
 
-    LiveData<List<CourseOffering>> getCourseOffering(){return mDAO.getCourseOffering();}
+    public LiveData<List<CourseOffering>> getCourseOffering(){return mDAO.getCourseOffering();}
 
 
     LiveData<List<CourseOffering>> getCourseOfferingByCourseID(int courseID){
@@ -146,7 +146,7 @@ private LiveData<List<Course>> mAllCourses;
         });
     }
 
-    LiveData<List<Student>> getStudentByClassOfferingID(int courseOfferingID) {
+    public LiveData<List<Student>> getStudentByClassOfferingID(int courseOfferingID) {
         return mDAO.getStudentByClassOfferingID(courseOfferingID);};
 
     LiveData<List<CourseOffering>> getClassOfferingByStudentID(int id){

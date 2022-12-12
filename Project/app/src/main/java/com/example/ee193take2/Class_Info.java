@@ -29,17 +29,17 @@ public class Class_Info extends Fragment {
 //        /* Text Field For Class Name */
 //
 //
-        /* Offering List */
-        binding.buttonNewOffering.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//              pass class id in the instructor?
-                Class_Offerings class_offer = new Class_Offerings();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.replaceContainer, class_offer);
-                transaction.commit();
-            }
-        });
+//        /* Offering List */
+//        binding.buttonNewOffering.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////              pass class id in the instructor?
+//                Class_Offerings class_offer = new Class_Offerings();
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                transaction.replace(R.id.replaceContainer, class_offer);
+//                transaction.commit();
+//            }
+//        });
 
 //        Button add_course_offering = rootView.findViewById(R.id.add_class_button);
 //        add_class.setOnClickListener( view -> {
