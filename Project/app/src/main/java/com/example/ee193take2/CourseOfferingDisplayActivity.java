@@ -58,7 +58,6 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
         AtomicReference<String> class_name = new AtomicReference<String>();
 
         int course_id = getIntent().getIntExtra("course_id",0);
-        int cid = getIntent().getIntExtra("cid",0);
         Log.d("here", Integer.toString(course_id));
 
 
@@ -68,9 +67,11 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
 
         this_course.observe(this, course ->{
             class_name.set(course.getClass_name());
+            text.setText(class_name.toString());
         });
 
-        text.setText(class_name.toString());
+        int cid = 1;
+
 
 
         RecyclerView recyclerView = findViewById((R.id.recyclerView2));

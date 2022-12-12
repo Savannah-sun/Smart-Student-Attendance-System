@@ -26,7 +26,7 @@ public class CourseOfferingListAdapter extends ListAdapter<CourseOffering, Cours
     @Override
     public void onBindViewHolder(CourseOfferingViewHolder holder, int position){
         CourseOffering current = getItem(position);
-        holder.bind("Classroom " + current.getClassroom());
+        holder.bind( Integer.toString(current.getCourse_id()) + " Rm " + current.getClassroom());
     }
 
     public static class CourseDiff extends DiffUtil.ItemCallback<CourseOffering>{
