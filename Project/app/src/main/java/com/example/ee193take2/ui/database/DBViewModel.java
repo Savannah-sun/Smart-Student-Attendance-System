@@ -107,7 +107,7 @@ private LiveData<List<Course>> mAllCourses;
     public LiveData<List<CourseOffering>> getCourseOffering(){return mDAO.getCourseOffering();}
 
 
-    LiveData<List<CourseOffering>> getCourseOfferingByCourseID(int courseID){
+    public LiveData<List<CourseOffering>> getCourseOfferingByCourseID(int courseID){
         return mDAO.getCourseOfferingByCourseID(courseID);
     }
 
