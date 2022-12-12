@@ -61,9 +61,7 @@ public class Class_Offerings_Activity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        dbViewModel.getCourseOffering().observe(this, courseofferings -> {
-            adapter.submitList(courseofferings);
-        });
+
 
 //        mClass_Name = findViewById(R.id.className);
 //        mStatus = findViewById(R.id.course_status);
@@ -81,7 +79,11 @@ public class Class_Offerings_Activity extends AppCompatActivity {
 
         this_course.observe(this, course ->{
             course_id.set(course.getCourse_id());
+            dbViewModel.getCourseOfferingByCourseID(course_id.intValue()).observe(this, courseofferings -> {
+                adapter.submitList(courseofferings);
+            });
         });
+
 
 
         Button add_course_offering = findViewById(R.id.addStudent);
