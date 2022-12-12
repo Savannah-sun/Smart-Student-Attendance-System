@@ -37,7 +37,8 @@ public class NewCourseOfferingActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(view -> {
             Intent replyIntent = new Intent();
-            if (TextUtils.isEmpty(mEditCourseID.getText()) || TextUtils.isEmpty(mEditClassroomNum.getText()) || TextUtils.isEmpty(mEditNumStudents.getText())) {
+            if (TextUtils.isEmpty(mEditCourseID.getText()) || TextUtils.isEmpty(mEditClassroomNum.getText())
+                    || TextUtils.isEmpty(mEditNumStudents.getText())) {
                 setResult(RESULT_CANCELED, replyIntent);
             } else {
                 int course_id = Integer.parseInt(mEditCourseID.getText().toString());
