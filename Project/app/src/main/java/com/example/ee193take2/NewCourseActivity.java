@@ -25,7 +25,6 @@ public class NewCourseActivity extends AppCompatActivity {
         mNumOfferings = findViewById(R.id.numOfferings);
 
 
-
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(view -> {
             Intent replyIntent = new Intent();

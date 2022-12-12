@@ -52,7 +52,7 @@
             android:layout_height="match_parent"
             android:translationY="45dp"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="31dp">
+            tools:layout_editor_absoluteY="11dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 

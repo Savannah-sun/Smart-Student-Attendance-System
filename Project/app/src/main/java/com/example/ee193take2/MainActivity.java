@@ -41,7 +41,8 @@ import pl.com.salsoft.sqlitestudioremote.SQLiteStudioService;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
-    private DBViewModel dbViewModel;public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    private DBViewModel dbViewModel;
+    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     Random random = new Random();
 
     @Override
