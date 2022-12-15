@@ -11,11 +11,13 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.ee193take2.CourseOfferingDisplayActivity;
 import com.example.ee193take2.R;
 import com.example.ee193take2.StudentAttendanceDisplayActivity;
 import com.example.ee193take2.ui.database.CourseOffering;
 import com.example.ee193take2.ui.database.Student;
+
 
 public class StudentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -54,6 +56,7 @@ public class StudentViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View v){
+
         Log.d("Testing","Course offering clicked");
         Context currActivity = this.studentItemView.getContext();
         Intent intent = new Intent(currActivity, StudentAttendanceDisplayActivity.class);
@@ -65,5 +68,6 @@ public class StudentViewHolder extends RecyclerView.ViewHolder implements View.O
         currActivity.startActivity(intent);
 
     }
+
 
 }
