@@ -191,23 +191,27 @@ private LiveData<List<Course>> mAllCourses;
         });
     };
 
-    void deleteAttendance(Attendance attendance) {
+    public void deleteAttendance(Attendance attendance) {
         DAOdatabase.databaseWriteExecutor.execute(() -> {
             mDAO.deleteAttendance(attendance);
         });
     };
 
-    void updateAttendance(Attendance attendance) {
+    public void updateAttendance(Attendance attendance) {
         DAOdatabase.databaseWriteExecutor.execute(() -> {
             mDAO.updateAttendance(attendance);
         });
     };
 
-    LiveData<Boolean> getAllAttendanceByStudentIDDateCourseOffering(Date date, int student_id, int courseOffering_id){
-        return mDAO.getAllAttendanceByStudentIDDateCourseOffering(date, student_id, courseOffering_id);
+    public LiveData<List<Boolean>> getAllAttendanceByStudentIDDateCourseOffering(int student_id, int courseOffering_id){
+        return mDAO.getAllAttendanceByStudentIDDateCourseOffering(student_id, courseOffering_id);
     };
 
-    LiveData<List<Integer>> getAttendPerformanceByTime(Date start, Date end, int courseOffering_id){
+    public LiveData<List<Attendance>> getAttendanceByStudentID(int student_id, int courseOffering_id){
+        return mDAO.getStudentAttendance(student_id,courseOffering_id);
+    }
+
+    public LiveData<List<Integer>> getAttendPerformanceByTime(Date start, Date end, int courseOffering_id){
         return mDAO.getAttendPerformanceByTime(start,end,courseOffering_id);
     };
 

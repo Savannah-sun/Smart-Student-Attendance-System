@@ -142,8 +142,13 @@ public interface DAO {
 
     //get a student's attendance on a specific date and course offering id
     @Query("SELECT attend FROM attendance_table WHERE student_id = :student_id " +
-            "AND date = :date AND courseOffering_id = :courseOffering_id")
-    LiveData<Boolean> getAllAttendanceByStudentIDDateCourseOffering(Date date, int student_id, int courseOffering_id);
+            "AND courseOffering_id = :courseOffering_id")
+    LiveData<List<Boolean>> getAllAttendanceByStudentIDDateCourseOffering(int student_id, int courseOffering_id);
+
+    @Query("SELECT * FROM attendance_table WHERE student_id =:student_id AND courseOffering_id =:courseOffering_id")
+    LiveData<List<Attendance>> getStudentAttendance(int student_id, int courseOffering_id);
+
+
 
     //from date start to date end, for a specific course offering id, get that day's all student attendance,
     // the number of result represents the number of presence that day

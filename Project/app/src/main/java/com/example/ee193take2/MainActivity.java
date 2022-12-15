@@ -74,22 +74,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+//
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener( view -> {
+//            Intent intent =new Intent(MainActivity.this, NewStudentActivity.class);
+//            NewStudentActivityResultLauncher.launch(intent);
+//        });
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener( view -> {
-            Intent intent =new Intent(MainActivity.this, NewStudentActivity.class);
-            NewStudentActivityResultLauncher.launch(intent);
-        });
-
-        FloatingActionButton hide = findViewById(R.id.hide);
-        hide.setOnClickListener( view -> {
-            if(recyclerView.getVisibility() == View.VISIBLE){
-                recyclerView.setVisibility(View.INVISIBLE);
-            }
-            else{
-                recyclerView.setVisibility(View.VISIBLE);
-            }
-        });
+//        FloatingActionButton hide = findViewById(R.id.hide);
+//        hide.setOnClickListener( view -> {
+//            if(recyclerView.getVisibility() == View.VISIBLE){
+//                recyclerView.setVisibility(View.INVISIBLE);
+//            }
+//            else{
+//                recyclerView.setVisibility(View.VISIBLE);
+//            }
+//        });
 
     }
 
