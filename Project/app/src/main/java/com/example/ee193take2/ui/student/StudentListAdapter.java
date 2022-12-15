@@ -1,5 +1,6 @@
 package com.example.ee193take2.ui.student;
 
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,13 +11,15 @@ import com.example.ee193take2.ui.database.Student;
 
 public class StudentListAdapter extends ListAdapter<Student, StudentViewHolder> {
 
+    public StudentViewHolder viewHolder;
     public StudentListAdapter(@NonNull DiffUtil.ItemCallback<Student> diffCallback){
         super(diffCallback);
     }
 
     @Override
     public StudentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return StudentViewHolder.create(parent);
+        viewHolder = StudentViewHolder.create(parent);
+        return viewHolder;
     }
 
     @Override
@@ -24,6 +27,8 @@ public class StudentListAdapter extends ListAdapter<Student, StudentViewHolder> 
         Student current = getItem(position);
         holder.bind(current.getLastName() + ", " + current.getFirstName());
     }
+
+
 
     public static class StudentDiff extends DiffUtil.ItemCallback<Student>{
 

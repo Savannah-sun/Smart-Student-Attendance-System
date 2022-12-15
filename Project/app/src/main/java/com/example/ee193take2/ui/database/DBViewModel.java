@@ -185,7 +185,7 @@ private LiveData<List<Course>> mAllCourses;
 
 /**------------------------------Attendance View Model------------------------------------------------**/
 
-    void insertAttendance(Attendance attendance){
+   public void insertAttendance(Attendance attendance){
         DAOdatabase.databaseWriteExecutor.execute(() -> {
             mDAO.insertAttendance(attendance);
         });

@@ -1,11 +1,14 @@
 package com.example.ee193take2;
 
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.ee193take2.databinding.ActivityClassOfferingDisplayBinding;
+import com.example.ee193take2.ui.database.Attendance;
 import com.example.ee193take2.ui.database.Course;
 import com.example.ee193take2.ui.database.CourseOffering;
 import com.example.ee193take2.ui.database.DBViewModel;
@@ -14,10 +17,13 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,11 +41,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ee193take2.ui.database.Student;
 import com.example.ee193take2.ui.database.StudentClassOffering;
 import com.example.ee193take2.ui.student.StudentListAdapter;
+import com.example.ee193take2.ui.student.StudentViewHolder;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
+
 
 public class CourseOfferingDisplayActivity extends AppCompatActivity {
 
@@ -52,6 +64,9 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
     private CheckBox mStatus;
     private DBViewModel dbViewModel;
     private LifecycleOwner ctx;
+    CalendarView cal;
+    TextView date_text;
+
     int course_id;
     AtomicInteger cid = new AtomicInteger();
     String classroom;
@@ -61,6 +76,8 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
         random = new Random();
         super.onCreate(savedInstanceState);
         ctx= this;
+        final Date[] date = new Date[1];
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
 
         binding = ActivityClassOfferingDisplayBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -71,15 +88,20 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
 
         AtomicReference<String> class_name = new AtomicReference<String>();
 
+        //get intentions
         course_id = getIntent().getIntExtra("course_id", 0);
         classroom = getIntent().getStringExtra("classroom");
-        Log.d("here", Integer.toString(course_id));
 
-
+        //get ui elements
+        cal = findViewById(R.id.calendarView2);
+        cal.setVisibility(View.GONE);
         TextView text = findViewById(R.id.test_text);
+        date_text = findViewById(R.id.date_text);
+        date_text.setText(dateFormat.format((cal.getDate())));
+        date[0] = new Date(cal.getDate());
 
+        //get class name for the purposes of displaying it at the top of the screen
         LiveData<Course> this_course = dbViewModel.getCourseByID(course_id);
-
         this_course.observe(this, course -> {
             class_name.set(course.getClass_name());
             text.setText(class_name.toString());
@@ -105,11 +127,54 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
         });
 
 
-        Button add_course_offering = findViewById(R.id.addStudent);
-        add_course_offering.setOnClickListener(view -> {
+        Button add_student = findViewById(R.id.addStudent);
+        add_student.setOnClickListener(view -> {
             Intent intent = new Intent(this, NewStudentActivity.class);
             NewStudentActivityResultLauncher.launch(intent);
         });
+        //Change date selection updates locally stored date value
+        cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
+                date[0] = new Date(year,month,day);
+                date_text.setText((dateFormat.format(date[0])));
+            }
+        });
+
+        //change date button
+        Button change_date = findViewById(R.id.selectDate);
+        change_date.setOnClickListener(view -> {
+            if(cal.getVisibility() == view.GONE) {
+                change_date.setText("Close Calendar");
+                cal.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+            }
+            else {
+                change_date.setText("Change Date");
+                cal.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+            }
+
+        });
+
+        Button take_attendance = findViewById(R.id.take_attendance);
+        take_attendance.setOnClickListener(view ->{
+            CheckBox checkBox;
+            Student current_student;
+            for(int i =0; i< recyclerView.getChildCount(); i++){
+                checkBox = (recyclerView.getChildAt(i).findViewById(R.id.present_box));
+                current_student  = adapter.getCurrentList().get(i);
+                Log.d("TESTING" , checkBox.toString() + "\n" + current_student.toString());
+
+                dbViewModel.insertAttendance(new Attendance(current_student.getStudent_id(), cid.intValue(), new java.sql.Date(date[0].getTime()),checkBox.isChecked()));
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Attendance Taken Successfully!",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+
     }
 
 //        final Button button = findViewById(R.id.button_save);

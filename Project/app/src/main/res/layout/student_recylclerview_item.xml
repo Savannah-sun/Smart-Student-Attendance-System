@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="false"
+    android:layout_alignParentBottom="false"
+    android:layout_centerInParent="false"
+    android:layout_centerHorizontal="false"
+    android:layout_centerVertical="false"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:translationX="60dp">
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_200"
+        android:fontFamily="sans-serif-light"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/present_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Present ?"
+        android:translationX="50dp"
+        android:translationY="-15dp" />
+</LinearLayout>

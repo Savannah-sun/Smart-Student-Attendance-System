@@ -131,7 +131,7 @@ public interface DAO {
 
     /**-------------------------------Attendance Table----------------------------------------------**/
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAttendance(Attendance attendance);
 
     @Delete
