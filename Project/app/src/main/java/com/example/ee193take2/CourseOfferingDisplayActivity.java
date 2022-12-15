@@ -113,6 +113,8 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
+
         LiveData<List<CourseOffering>> course_list = dbViewModel.getCourseOfferingByCourseID(course_id);
 
         course_list.observe(this, courselist -> {
@@ -120,11 +122,14 @@ public class CourseOfferingDisplayActivity extends AppCompatActivity {
                 if (course.getClassroom().equals(classroom)) {
                     cid.set(course.getCid());
                     dbViewModel.getStudentByClassOfferingID(cid.intValue()).observe(this, students -> {
+                        adapter.setCourseOffering(course);
                         adapter.submitList(students);
                     });
                 }
             }
         });
+
+
 
 
         Button add_student = findViewById(R.id.addStudent);

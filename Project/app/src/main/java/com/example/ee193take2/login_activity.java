@@ -9,6 +9,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ public class login_activity extends AppCompatActivity {
 
         username = findViewById(R.id.edit_word_username);
         password = findViewById(R.id.edit_word_password);
+        password.setTransformationMethod(new PasswordTransformationMethod());
 
         Log.d("Debug", "Created!!!!! -------");
 

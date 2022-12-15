@@ -7,10 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
+import com.example.ee193take2.ui.database.CourseOffering;
 import com.example.ee193take2.ui.database.Student;
 
 public class StudentListAdapter extends ListAdapter<Student, StudentViewHolder> {
-
+    private CourseOffering courseOffering;
     public StudentViewHolder viewHolder;
     public StudentListAdapter(@NonNull DiffUtil.ItemCallback<Student> diffCallback){
         super(diffCallback);
@@ -25,10 +26,14 @@ public class StudentListAdapter extends ListAdapter<Student, StudentViewHolder> 
     @Override
     public void onBindViewHolder(StudentViewHolder holder, int position){
         Student current = getItem(position);
+        holder.setStudent(current);
+        holder.setCourseOffering(courseOffering);
         holder.bind(current.getLastName() + ", " + current.getFirstName());
     }
 
-
+    public void setCourseOffering(CourseOffering courseOffering) {
+        this.courseOffering = courseOffering;
+    }
 
     public static class StudentDiff extends DiffUtil.ItemCallback<Student>{
 

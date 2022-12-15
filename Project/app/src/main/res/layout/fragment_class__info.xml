@@ -14,7 +14,7 @@
         tools:layout_editor_absoluteY="-88dp">
 
         <TextView
-            android:id="@+id/class_info_header"
+            android:id="@+id/attendance_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -60,7 +60,7 @@
             android:layout_width="409dp"
             android:layout_height="438dp"
             android:layout_marginTop="37dp"
-            app:layout_constraintTop_toBottomOf="@+id/class_info_header"
+            app:layout_constraintTop_toBottomOf="@+id/attendance_header"
             tools:layout_editor_absoluteX="1dp"
             tools:ignore="MissingConstraints" />
 

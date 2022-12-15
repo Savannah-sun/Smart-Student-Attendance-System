@@ -11,24 +11,41 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ee193take2.Class_Offerings_Activity;
-import com.example.ee193take2.R;
-import com.example.ee193take2.TakeAttendanceActivity;
 
-public class StudentViewHolder extends RecyclerView.ViewHolder {
+import com.example.ee193take2.CourseOfferingDisplayActivity;
+import com.example.ee193take2.R;
+import com.example.ee193take2.StudentAttendanceDisplayActivity;
+import com.example.ee193take2.ui.database.CourseOffering;
+import com.example.ee193take2.ui.database.Student;
+
+
+public class StudentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final TextView studentItemView;
     private final CheckBox checkBox;
+    private Student student;
+    private CourseOffering courseOffering;
 
     private StudentViewHolder(View itemView){
         super(itemView);
         studentItemView = itemView.findViewById(R.id.textView);
         checkBox =itemView.findViewById(R.id.present_box);
+        itemView.setOnClickListener(this);
     }
 
     public void bind(String text) {
         studentItemView.setText(text);
     }
+
+    public void setStudent(Student student){
+        this.student = student;
+    }
+
+    public void setCourseOffering(CourseOffering courseOffering){
+        this.courseOffering = courseOffering;
+    }
+
+
 
     static StudentViewHolder create(ViewGroup parent){
         View view = LayoutInflater.from(parent.getContext())
@@ -39,13 +56,17 @@ public class StudentViewHolder extends RecyclerView.ViewHolder {
 
     @Override
     public void onClick(View v){
-        String name = this.studentItemView.getText().toString();
-        Log.d("hereeee", name);
-        //Launch Activity..
+
+        Log.d("Testing","Course offering clicked");
         Context currActivity = this.studentItemView.getContext();
-        Intent intent = new Intent(currActivity, TakeAttendanceActivity.class); // need to create the activity for this
-        intent.putExtra("present" , name);
+        Intent intent = new Intent(currActivity, StudentAttendanceDisplayActivity.class);
+        intent.putExtra("student_id", student.getStudent_id());
+        intent.putExtra("course_id", courseOffering.getCourse_id());
+        intent.putExtra("course_offering_id",courseOffering.getCid());
+        intent.putExtra("student_first", student.getFirstName());
+        intent.putExtra("student_last",student.getLastName());
         currActivity.startActivity(intent);
+
     }
 
 
