@@ -79,19 +79,6 @@ public class Class_Home extends Fragment {
         });
 
 
-//        /* See Class */
-//        binding.buttonPretendClass.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Class_Info add_class = new Class_Info();
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.replaceContainer, add_class);
-//                transaction.commit();
-//            }
-//        });
-
-
-
         return rootView;
     }
 
@@ -101,8 +88,8 @@ public class Class_Home extends Fragment {
 
 
 
-        dbViewModel.insertCourse(new Course(1, "Testing", true, 1));
-        dbViewModel.insertCourse(new Course(2, "EE_101", true, 1));
+        dbViewModel.insertCourse(new Course(1, "CS-101", true, 1));
+        dbViewModel.insertCourse(new Course(2, "EE-101", true, 1));
 
 
         dbViewModel.getAlphabetizedCourses().observe(getViewLifecycleOwner(), courses -> {

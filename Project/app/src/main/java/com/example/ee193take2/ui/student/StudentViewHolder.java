@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,14 +15,15 @@ import com.example.ee193take2.Class_Offerings_Activity;
 import com.example.ee193take2.R;
 import com.example.ee193take2.TakeAttendanceActivity;
 
-class StudentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class StudentViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView studentItemView;
+    private final CheckBox checkBox;
 
     private StudentViewHolder(View itemView){
         super(itemView);
         studentItemView = itemView.findViewById(R.id.textView);
-        itemView.setOnClickListener(this);
+        checkBox =itemView.findViewById(R.id.present_box);
     }
 
     public void bind(String text) {
@@ -30,7 +32,7 @@ class StudentViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     static StudentViewHolder create(ViewGroup parent){
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recylclerview_item,parent,false);
+                .inflate(R.layout.student_recylclerview_item,parent,false);
 
         return new StudentViewHolder(view);
     }

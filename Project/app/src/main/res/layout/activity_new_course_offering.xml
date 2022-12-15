@@ -59,6 +59,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.895" />
 
+
 <!--    <androidx.recyclerview.widget.RecyclerView-->
 <!--        android:id="@+id/rView_new_course_offering"-->
 <!--        android:layout_width="match_parent"-->

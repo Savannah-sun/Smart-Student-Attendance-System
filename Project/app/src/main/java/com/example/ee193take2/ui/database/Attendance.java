@@ -20,9 +20,9 @@ import java.sql.Date;
                         parentColumns = "student_id",
                         childColumns = "student_id",
                         onDelete = CASCADE),
-                @ForeignKey(entity = CalendarCourseOffering.class,
-                        parentColumns = {"courseOffering_id","date"},
-                        childColumns = {"courseOffering_id","date"},
+                @ForeignKey(entity = CourseOffering.class,
+                        parentColumns = "cid",
+                        childColumns = "courseOffering_id",
                         onDelete = CASCADE)})
 public class Attendance {
     private int student_id;
