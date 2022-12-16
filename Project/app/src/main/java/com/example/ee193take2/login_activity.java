@@ -13,6 +13,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class login_activity extends AppCompatActivity {
 
@@ -49,6 +50,7 @@ public class login_activity extends AppCompatActivity {
 
 
 
+
 //                    Log.d("Debug", "here");
 ////                    Change Fragment
 //                    Class_Home class_info = new Class_Home();
@@ -60,8 +62,19 @@ public class login_activity extends AppCompatActivity {
 //                    startActivity(intent);
                     finish();
                 }
+            else{
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Incorrect Username or Password",
+                            Toast.LENGTH_LONG).show();
+                }
             }
-
+            else{
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Incorrect Username or Password",
+                        Toast.LENGTH_LONG).show();
+            }
 //            finish();
         });
 
