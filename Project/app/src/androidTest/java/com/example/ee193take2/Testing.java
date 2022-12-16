@@ -2,6 +2,7 @@ package com.example.ee193take2;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -29,8 +30,8 @@ public class Testing {
     @Before
     public void createDb() {
         Context context = ApplicationProvider.getApplicationContext();
-        db = DAOdatabase.getInstance(context);
-        dao = db.allDao();
+        db = DAOdatabase.getDatabase(context);
+        dao = db.DAO();
     }
 
     @After
@@ -39,10 +40,15 @@ public class Testing {
     }
 
     @Test
+    public void firstStudentVomit(){
+
+    }
+
+    @Test
     public void writeUserAndReadInList() throws Exception {
         for(int i = 0;i<100;i++){
             Student s = new Student(i,"a","b","bb bb","freshman","card");
-            db.allDao().insertStudent(s);
+            db.DAO().insertStudent(s);
         }
     }
 
@@ -51,7 +57,7 @@ public class Testing {
         System.out.println(dao.getByID(1));
 //        Student s = new Student(100,"first","last","bb bb","freshman","card"    );
 //        dao.insertStudent(s);
-        for(Student x : dao.getByName("f","l")){
+        for(LiveData<Student> x : dao.getByName("f","l")){
             System.out.println(x);
         }
     }

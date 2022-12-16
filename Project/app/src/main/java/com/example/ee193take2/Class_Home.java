@@ -3,6 +3,7 @@ package com.example.ee193take2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -10,6 +11,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -34,6 +36,7 @@ import com.example.ee193take2.ui.database.Student;
 import com.example.ee193take2.ui.student.StudentListAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
 import java.util.Random;
 
 import pl.com.salsoft.sqlitestudioremote.SQLiteStudioService;
@@ -78,6 +81,22 @@ public class Class_Home extends Fragment {
             CourseActivityLauncher.launch(intent);
         });
 
+        Button expert_attendance = rootView.findViewById(R.id.add_class_button2);
+        expert_attendance.setOnClickListener( view -> {
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            i.setType("message/rfc822");
+
+            String filename = "app_database";
+            String pathname = thisContext.getApplicationInfo().dataDir + "/databases";
+            String fileLocation = pathname + "/" + filename;
+            File data = new File(fileLocation);
+            Uri uri = FileProvider.getUriForFile(thisContext, "com.example.ee193take2.provider", data);
+            i.putExtra(Intent.EXTRA_SUBJECT, "All information");
+            i.putExtra(Intent.EXTRA_TEXT   , "The database file of Smart Student Attendance System is in the attachment, please feel free to reach me if you have any questions");
+            i.putExtra(Intent.EXTRA_STREAM, uri);
+            startActivity(Intent.createChooser(i, "All Data has been sent"));
+        });
 
         return rootView;
     }
@@ -100,6 +119,8 @@ public class Class_Home extends Fragment {
 
 
     }
+
+
 
     ActivityResultLauncher<Intent> CourseActivityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
